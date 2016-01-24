@@ -15,6 +15,8 @@ elif [[ $BUNDLE_URL ]]; then
   cd /tmp/bundle/
 elif [ -d /built_app ]; then
   cd /built_app
+elif [[ $METEORD_VOLBUILD ]]; then
+  cd /app
 else
   echo "=> You don't have an meteor app to run in this image."
   exit 1
@@ -41,4 +43,13 @@ fi
 export PORT=${PORT:-80}
 
 echo "=> Starting meteor app on port:$PORT"
-node main.js
+
+if [[ $METEORD_VOLBUILD ]]; then
+  if [[ $SETTINGS_PATH ]]; then
+    meteor --settings $SETTINGS_PATH --port $PORT
+  else
+    meteor --port $PORT
+  fi
+else
+  node main.js
+fi
