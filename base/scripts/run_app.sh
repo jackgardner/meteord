@@ -39,17 +39,17 @@ if [[ $DELAY ]]; then
   sleep $DELAY
 fi
 
-# Honour already existing PORT setup
-export PORT=${PORT:-80}
-
-echo "=> Starting meteor app on port:$PORT"
-
 if [[ $METEORD_VOLBUILD ]]; then
-  if [[ $SETTINGS_PATH ]]; then
-    meteor --settings $SETTINGS_PATH --port $PORT
+  if [[ $ARGS ]]; then
+    echo "=> Starting meteor app with args: $ARGS"
+    meteor $ARGS
   else
-    meteor --port $PORT
+    echo "=> Starting meteor app"
+    meteor
   fi
 else
+  # Honour already existing PORT setup
+  export PORT=${PORT:-80}
+  echo "=> Starting meteor app on port:$PORT"
   node main.js
 fi
