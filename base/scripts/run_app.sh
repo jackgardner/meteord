@@ -40,15 +40,12 @@ if [[ $DELAY ]]; then
 fi
 
 if [[ $METEORD_VOLBUILD ]]; then
-  if [[ $ARGS ]]; then
-    echo "=> Starting meteor app with args: $ARGS"
-    meteor $ARGS
-  else
-    echo "=> Starting meteor app"
-    meteor
-  fi
+  # Default port 80; if ARGS provided, they should include "--port 80"
+  export ARGS=${ARGS:---port 80}
+  echo "=> Starting meteor app with args: $ARGS"
+  meteor $ARGS
 else
-  # Honour already existing PORT setup
+  # Default port 80; honor an override
   export PORT=${PORT:-80}
   echo "=> Starting meteor app on port:$PORT"
   node main.js
