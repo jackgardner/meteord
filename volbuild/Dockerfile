@@ -1,4 +1,4 @@
-FROM athyuttamre/meteord:base
+FROM meteorhacks/meteord:base
 MAINTAINER MeteorHacks Pvt Ltd.
 
 ONBUILD ENV METEORD_VOLBUILD=true
