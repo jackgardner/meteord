@@ -1,7 +1,9 @@
-FROM meteorhacks/meteord:base
+FROM jackgardner/meteord:base
 MAINTAINER MeteorHacks Pvt Ltd.
 
 ONBUILD ENV METEORD_VOLBUILD=true
+ARG METEOR_RELEASE
+ENV METEOR_RELEASE $METEOR_RELEASE
 
-ONBUILD RUN bash $METEORD_DIR/lib/install_meteor.sh
+ONBUILD RUN bash $METEORD_DIR/lib/install_meteor.sh $METEOR_RELEASE
 ONBUILD VOLUME /app
