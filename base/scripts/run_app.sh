@@ -39,6 +39,10 @@ if [[ $DELAY ]]; then
   sleep $DELAY
 fi
 
+if [[ $INSTALL_NODE_MODULES ]]; then
+  meteor npm install
+fi
+
 if [[ $METEORD_VOLBUILD ]]; then
   # Default port 80; if ARGS provided, they should include "--port 80"
   export ARGS=${ARGS:---port 80}
